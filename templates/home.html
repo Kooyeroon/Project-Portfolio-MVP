@@ -1,0 +1,48 @@
+{% extends 'app.html' %}
+{% block content %}
+
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center white" style="color:black">
+    <div>
+        <h1 class="text-center">About</h1>
+        <div id = "about-div">
+            <p class="text-center" >
+                This web application serves as a platform for analyzing load effects, including shear force and bending
+                moment, within a beam. Furthermore, it generates shear force and bending moment diagrams, crucial for 
+                understanding load magnitudes along the beam's length. This functionality facilitates straightforward 
+                analysis for students, professionals, and researchers alike.
+            </p>
+            </div>
+            
+	            <h1 id = "head-h">
+	                Beam Calculator
+	            </h1>
+	            <p class="lead font-weight-normal">Let start anayzing load effect in beam</p>
+	            <a class="btn btn-primary" href="{{ url_for('register')}}"> Start</a>
+        	</div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+</div>
+<br>
+<footer id = "footer-st" class="text-center"> Copyright @2024 Goshu Kenea</footer>
+    
+    <style type="text/css">
+        #about-div
+        {
+            margin-bottom: 40px;
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+        #head-h
+        {
+            margin-bottom: 40px;
+            color: #07097a;
+        }
+        #footer-st
+        {
+            margin-bottom: 40px;
+        }
+    </style>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'app.html' %}
+{% block content %}
+
+
+<h2>This is the clear data page </h2>
+
+<form action="/clear_data" method="POST">
+   
+    {{ form.submit(class="btn btn-dark mt-4")}}
+    <a href="/beam" class="btn btn-secondary mt-4">Back to Main Page </a>
+  </form>
+{% endblock %}

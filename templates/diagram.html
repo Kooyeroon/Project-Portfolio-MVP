@@ -1,0 +1,105 @@
+{% extends 'app.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class = "text-center"> Shear Force and Bending Moment Diagram</h2>
+    
+        <div class="graph-container">
+        <canvas id="shearForceChart" width="600" height="400" style="border: 1px solid #ccc;"></canvas>
+        </div>
+        <div class="graph-container">
+            <canvas id="bendingMomentChart" width="600" height="400" style="border: 1px solid #ccc;"></canvas>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const data = {{ beam_data | tojson }};
+                const positions = data.map(d => d[0]);
+                const shearForces = data.map(d => d[1]);
+                const bendingMoments = data.map(d => d[2]);
+
+                const shearForceChart = document.getElementById('shearForceChart').getContext('2d');
+                new Chart(shearForceChart, {
+                    type: 'line',
+                    data: {
+                        labels: positions,
+                        datasets: [{
+                            label: 'Shear Force (kN)',
+                            data: shearForces,
+                            borderColor: 'blue',
+                            backgroundColor: 'orange',
+                            borderWidth: 1,
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: 'Length of Beam/Position  (m)'
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: 'Shear Force (kN)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const bendingMomentChart = document.getElementById('bendingMomentChart').getContext('2d');
+                new Chart(bendingMomentChart, {
+                    type: 'line',
+                    data: {
+                        labels: positions,
+                        datasets: [{
+                            label: 'Bending Moment (kNm)',
+                            data: bendingMoments,
+                            backgroundColor: 'green',
+                            borderColor: 'red',
+                            borderWidth: 1,
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: 'Length of Beam/Position (m)'
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                title: {
+                                    display: true,
+                                    text: 'Bending Moment (kNm)'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+</div>
+
+<style>
+    .graph-container {
+        width: 700px;
+        margin: auto;
+        margin-bottom: 20px; /* Add margin between the two graphs */
+    }
+</style>
+{% endblock %}
